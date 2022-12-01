@@ -1,50 +1,50 @@
 import './StartPage.css'
-import Btn from '../components/Btn'
+
 
 function StartPage() {
     return (
-        <div>
+        <div className='App'>
             <div className="webHeader">
-                STRONA
-                <Btn
-                    text="Zaloguj"
-                />
+                Miejsce na nazwę i logo
+                <button className="logbtn">Zaloguj</button>
             </div>
             <div className="webBody">
                 <div className="siteDescription">
-                    <p>
+                    
                         Jesteś studentem?<br/>
                         Szukasz kogoś do pomocy?<br/>
                         A może pragniesz poznać kogoś z podobnymi zainteresowaniami?<br/>
-                        Jeśli tak, to trafiłeś idealnie!<br/>
+                        Jeśli tak, to trafiłeś idealnie!<br/><br/>
                         Witaj na <strong>Let's meet</strong>!
-                    </p>
+                
                 </div>
-                <form className="register">
-                    <h1>Zarejestruj się!</h1>
-                    <input className='registerInput'
-                        placeholder="Email"
-                    />
-                    <input className='registerInput'
-                        placeholder="Nick"
-                    />
-                    <input className='registerInput'
-                        placeholder="Hasło"
-                    />
-                    <input className='registerInput'
-                        placeholder="Powtórz hasło"
-                    />
-                    <input className='registerInput'
-                        placeholder="O mnie"
-                    />
-                    <input className='registerInput'
-                        placeholder="Miasto"
-                    />
-                    <input className='registerInput'
-                        placeholder="Szkoła"
-                    />
-                    <button className="registerButton">Zarejestruj się</button>
-                </form>
+                <div className="registerPart">
+                    <form className="register">
+                        <h1>Zarejestruj się!</h1>
+                        <input className='registerInput'
+                            placeholder="Email"
+                        />
+                        <input className='registerInput'
+                            placeholder="Nick"
+                        />
+                        <input className='registerInput'
+                            placeholder="Hasło"
+                        />
+                        <input className='registerInput'
+                            placeholder="Powtórz hasło"
+                        />
+                        <input className='registerInput'
+                            placeholder="O mnie"
+                        />
+                        <input className='registerInput'
+                            placeholder="Miasto"
+                        />
+                        <input className='registerInput'
+                            placeholder="Szkoła"
+                        />
+                        <button className="registerButton">Zarejestruj się</button>
+                    </form>
+                </div>
             </div>
         </div>
     )
