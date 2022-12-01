@@ -26,7 +26,6 @@
 
 .logbtn:hover{
     background-color:rgb(229, 244, 253);
-    scale:1.2;
     transition: 0.8s;
 }
 
@@ -55,7 +54,16 @@
     flex: 1;
     font-size: xx-large;
     letter-spacing: 3px;
-    overflow-x:auto;
+    overflow:auto;
+}
+
+.siteDescription {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+}
+
+.siteDescription::-webkit-scrollbar { 
+    display: none;  
 }
 
 .registerPart{
@@ -110,12 +118,11 @@
 
 .registerButton:hover{
     background-color:rgb(229, 244, 253);
-    scale:1.2;
     transition: 0.8s;
 }
 
 @media screen and (max-width: 950px) {
     .webBody {
-        flex-direction: column;
+        flex-direction: row;
     }
 }
