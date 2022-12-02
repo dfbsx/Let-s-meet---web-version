@@ -1,12 +1,20 @@
 import './StartPage.css'
+import { useNavigate } from "react-router-dom";
 
+function StartPage({setCurView}) {
 
-function StartPage() {
+    const navigate = useNavigate();
+
+    const login = () => {
+        setCurView("AccountView");
+        navigate(`/accountview`);
+      };
+
     return (
         <div className='App'>
             <div className="webHeader">
                 Miejsce na nazwę i logo
-                <button className="logbtn">Zaloguj</button>
+                <button className="logbtn" onClick={login}>Zaloguj</button>
             </div>
             <div className="webBody">
                 <div className="siteDescription">
