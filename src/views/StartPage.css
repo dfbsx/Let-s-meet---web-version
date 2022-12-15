@@ -129,6 +129,8 @@
     padding: 8px 8px 8px 16px;
     flex-basis: auto;
     width: 100%;
+    flex:1;
+    max-height: 70px;
 }
 
 .registerButton{
@@ -146,6 +148,8 @@
     box-sizing: border-box;
     flex-basis: auto;
     width: 80%;
+    flex:1;
+    max-height: 70px;
 }
 
 .registerButton:hover{

@@ -13,7 +13,7 @@ function StartPage({setCurView}) {
     return (
         <div className='App'>
             <div className="webHeader">
-                Let's meet!
+                <span style={{fontFamily:"Courier"}}>Let's meet!</span>
                 <button className="logbtn" onClick={login}>Zaloguj</button>
             </div>
             <div className="webBody">
