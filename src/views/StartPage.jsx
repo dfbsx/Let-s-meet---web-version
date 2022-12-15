@@ -13,17 +13,18 @@ function StartPage({setCurView}) {
     return (
         <div className='App'>
             <div className="webHeader">
-                Miejsce na nazwę i logo
+                Let's meet!
                 <button className="logbtn" onClick={login}>Zaloguj</button>
             </div>
             <div className="webBody">
                 <div className="siteDescription">
                     
-                        Jesteś studentem?<br/>
+                        <span>Jesteś studentem?<br/>
                         Szukasz kogoś do pomocy?<br/>
                         A może pragniesz poznać kogoś z podobnymi zainteresowaniami?<br/>
                         Jeśli tak, to trafiłeś idealnie!<br/><br/>
                         Witaj na <strong>Let's meet</strong>!
+                        </span>
                 
                 </div>
                 <div className="registerPart">
@@ -50,7 +51,7 @@ function StartPage({setCurView}) {
                         <input className='registerInput'
                             placeholder="Szkoła"
                         />
-                        <button className="registerButton">Zarejestruj się</button>
+                        <button className="registerButton">Dołącz!</button>
                     </form>
                 </div>
             </div>

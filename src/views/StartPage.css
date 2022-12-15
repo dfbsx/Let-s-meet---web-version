@@ -8,6 +8,8 @@
     padding:24px;
     justify-content: space-between;
     box-sizing: border-box;
+    font-size: xx-large;
+    font-weight: 700;
 }
 
 .logbtn{
@@ -21,12 +23,39 @@
     box-sizing: border-box;
     padding:10px;
     font-size: medium;
-    color:#535353 ;
+    color:#fff ;
+    border-color: #0096FF;
+    background-color: #0096FF;
+    font-weight: 500;
 }
 
 .logbtn:hover{
     background-color:rgb(229, 244, 253);
     transition: 0.8s;
+    color: #535353;
+}
+
+.logoutbtn{
+    height:40px;
+    width: 100px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #535353;
+    background-color: #fff;
+    border-radius: 16px;
+    box-sizing: border-box;
+    padding:10px;
+    font-size: medium;
+    color:#fff ;
+    border-color: #0096FF;
+    background-color: #0096FF;
+    font-weight: 500;
+}
+
+.logoutbtn:hover{
+    background-color:rgb(229, 244, 253);
+    transition: 0.8s;
+    color: #535353;
 }
 
 .webBody{
@@ -55,6 +84,7 @@
     font-size: xx-large;
     letter-spacing: 3px;
     overflow:auto;
+    min-width: 380px;
 }
 
 .siteDescription {
@@ -77,6 +107,7 @@
     padding:50px;
     justify-content: center;
     align-content: space-between;
+    min-width: 380px;
 }
 
 .register{
@@ -104,13 +135,14 @@
     padding:10px;
     border-style: solid;
     border-width: 1px;
-    border-color: #535353;
-    background-color: #fff;
+    border-color: #0096FF;
+    background-color: #0096FF;
     border-radius: 16px;
     box-sizing: border-box;
     padding:8px;
     font-size: medium;
-    color:#535353 ;
+    color:#fff ;
+    font-weight: 500;
     box-sizing: border-box;
     flex-basis: auto;
     width: 80%;
@@ -119,11 +151,15 @@
 .registerButton:hover{
     background-color:rgb(229, 244, 253);
     transition: 0.8s;
+    color:#535353
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
     .webBody {
         flex-direction: row;
         row-gap: 10px;
+    }
+    .siteDescription{
+        min-width: 480px;
     }
 }

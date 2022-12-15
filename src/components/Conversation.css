@@ -1,0 +1,27 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: #fff;
+    border-radius: 16px;
+    box-sizing: border-box;
+    flex-basis: auto;
+    width: 100%;
+}
+
+.item:hover{
+    border-color: #f6f6f6;
+    background-color:#f6f6f6;
+}
+
+.userNick{
+    font-weight: 500;
+    font-size: large;
+}
+
+.time{
+    font-size: medium;
+}
