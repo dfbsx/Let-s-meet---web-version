@@ -12,7 +12,7 @@ const Login = ({ open, onClose }) => {
 
 
   const handleLogin = () => {
-    login(logData)
+    login(logData.nick, logData.password)
       .then(() => {
         console.log("jej")
       })
