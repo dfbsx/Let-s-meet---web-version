@@ -8,9 +8,10 @@ function StartPage({setCurView}) {
 
     const navigate = useNavigate();
     const [openModal,setOpenModal]=useState(false)
+    //const [sucessedRegister,setSucessedRegister]=useState(true)
     const [registerData,setRegister]=useState({
         email:"",
-        nick:"",
+        userName:"",
         password:"",
         reapetedPassword:"",
         bio:"",
@@ -22,17 +23,19 @@ function StartPage({setCurView}) {
         register(registerData)
         .then(()=>{
             console.log("jej")
+
         })
         .catch((error)=>{
             console.log("dupa",error.response.data.title)
+            //setSucessedRegister(false)
         })
       }
 
     return (
         <div className='App'>
             <Login 
-                    open={openModal} 
-                    onClose={() => setOpenModal(false)}
+                    open={openModal}  
+                    setOpen={setOpenModal}
                 />
             <div className="webHeader">
                 <span style={{fontFamily:"Courier"}}>Let's meet!</span>
@@ -58,15 +61,18 @@ function StartPage({setCurView}) {
                         />
                         <input className='registerInput'
                             placeholder="Nick"
-                            value={registerData.nick}
-                            onChange={(e)=>setRegister({...registerData, nick:e.target.value})}
+                            value={registerData.userName}
+                            onChange={(e)=>setRegister({...registerData, userName:e.target.value})}
                         />
+                       
                         <input className='registerInput'
                             placeholder="Hasło"
                             type="password"
                             value={registerData.password}
                             onChange={(e)=>setRegister({...registerData, password:e.target.value})}
-                        />
+                    />
+                        
+                        
                         <input className='registerInput'
                             placeholder="Powtórz hasło"
                             type="password"

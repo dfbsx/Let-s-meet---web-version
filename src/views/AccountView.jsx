@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Conversation from '../components/Conversation';
 import Message from '../components/Message';
 import { RiSendPlaneLine } from 'react-icons/ri';
-import { CgClose } from 'react-icons/cg';
+import { CgClose, CgPen } from 'react-icons/cg';
 
 
 function AccountView({setCurView}) {
@@ -15,19 +15,29 @@ function AccountView({setCurView}) {
       navigate(`/`);
     };
 
+    const edit = () => {
+      setCurView("EditProfile");
+      navigate(`/editProfile`);
+    };
+
   
   return (
     <div className="AccountView">
       <div className="webHeader">
                 Let's meet!
                 <button className="logoutbtn" onClick={logout}>Wyloguj</button>
-        </div>
+      </div>
       <div className="siteBody">
       <div className="userPanel">
         <div className="userProfile">
-          <span className="userName">Cześć, <strong>Jacek</strong>!</span>
-          <span className="userDescription">Lubię dobrą książkę, dobry film i sporty ekstermalne takie jak szachy</span>
-          <button className="drawbtn">Losuj!</button>
+          <div className="editProfile">
+            <CgPen onClick={edit} style={{alignSelf:'flex-start',justifyContent:'flex-end'}}/>
+          </div>
+          <div className="userPart">
+            <span className="userName">Cześć, <strong>Jacek</strong>!</span>
+            <span className="userDescription">Lubię dobrą książkę, dobry film i sporty ekstermalne takie jak szachy</span>
+            <button className="drawbtn">Losuj!</button>
+          </div>
           </div>
         <div className="userMessages">Twoje wiadomości:
           <Conversation 

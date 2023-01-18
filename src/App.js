@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import setupAxios from './crud/setupAxios';
 import store from './store';
+import EditProfile from './views/EditProfile';
 
 function App() {
   const [curView, setCurView] = useState("StartPage");
@@ -28,6 +29,15 @@ function App() {
             path="/accountview"
             element={
               <AccountView
+                curView={curView}
+                setCurView={setCurView}
+              />
+            }
+          />
+          <Route
+            path="/editProfile"
+            element={
+              <EditProfile
                 curView={curView}
                 setCurView={setCurView}
               />
