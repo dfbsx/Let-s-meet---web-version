@@ -1,9 +1,13 @@
 import './login.css'
 import React, { useState } from 'react'
 import { login } from '../crud/login'
+import { useDispatch } from 'react-redux';
+import { authenticate } from '../store/actions';
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ open, onClose }) => {
-
+const Login = ({ open, setOpen}) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const [logData, setLogData] = useState({
     nick: "",
@@ -13,16 +17,19 @@ const Login = ({ open, onClose }) => {
 
   const handleLogin = () => {
     login(logData.nick, logData.password)
-      .then(() => {
-        console.log("jej")
+      .then((resp) => {
+        dispatch(authenticate(resp.data.token))
+        .then(()=>{
+          navigate("/accountview")
+        })
       })
       .catch((error) => {
-        console.log("dupa", error.response.data.title)
+        alert("Wprowadzone dane są niepoprawne")
       })
   }
   if (!open) return null;
   return (
-    <div onClick={onClose} className='overlay'>
+    <div onClick={()=>setOpen(false)} className='overlay'>
       <div className='modalContainer'
         onClick={(e) => {
           e.stopPropagation();
@@ -30,7 +37,7 @@ const Login = ({ open, onClose }) => {
       >
         <div>
           <div className='logContainer'>
-            <div className='closeBtn' onClick={onClose}>
+            <div className='closeBtn' onClick={()=>setOpen(false)}>
               X
             </div>
             <div className="formContainer">
