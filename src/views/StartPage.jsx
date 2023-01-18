@@ -3,10 +3,27 @@ import { useNavigate } from "react-router-dom";
 import {useState} from 'react';
 import { register } from '../crud/register';
 import Login from '../components/Login';
+import { useDispatch } from 'react-redux';
+import { authenticate } from '../store/actions';
+import { useEffect } from 'react';
+
 
 function StartPage({setCurView}) {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    useEffect(
+       ()=>{
+        const token = localStorage.getItem("Lets_meeet")
+        console.log(token)
+        if(token){
+            dispatch(authenticate(token))
+            navigate("/accountview")
+        }
+       }
+    );
+    
     const [openModal,setOpenModal]=useState(false)
     //const [sucessedRegister,setSucessedRegister]=useState(true)
     const [registerData,setRegister]=useState({
@@ -21,9 +38,11 @@ function StartPage({setCurView}) {
     })
       const handleRegister = () => {
         register(registerData)
-        .then(()=>{
-            console.log("jej")
-
+        .then((resp)=>{
+            dispatch(authenticate(resp.data.token))
+            .then(()=>{
+                navigate("/accountview")
+              })
         })
         .catch((error)=>{
             console.log("dupa",error.response.data.title)
