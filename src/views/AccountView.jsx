@@ -5,6 +5,8 @@ import Conversation from '../components/Conversation';
 import Message from '../components/Message';
 import { RiSendPlaneLine } from 'react-icons/ri';
 import { CgClose, CgPen } from 'react-icons/cg';
+import { draw } from '../crud/draw';
+import MessageField from '../components/MessageField';
 
 
 function AccountView({setCurView}) {
@@ -19,6 +21,16 @@ function AccountView({setCurView}) {
       setCurView("EditProfile");
       navigate(`/editProfile`);
     };
+
+    const handleDraw = () => {
+      draw()
+      .then((resp)=>{
+          console.log("to dostaliśmy", resp.data)
+      })
+      .catch(err=>{
+
+      })
+    }
 
   
   return (
@@ -36,7 +48,7 @@ function AccountView({setCurView}) {
           <div className="userPart">
             <span className="userName">Cześć, <strong>Jacek</strong>!</span>
             <span className="userDescription">Lubię dobrą książkę, dobry film i sporty ekstermalne takie jak szachy</span>
-            <button className="drawbtn">Losuj!</button>
+            <button className="drawbtn" onClick={handleDraw}>Losuj!</button>
           </div>
           </div>
         <div className="userMessages">Twoje wiadomości:
@@ -73,36 +85,7 @@ function AccountView({setCurView}) {
           <button className="logbtn" onClick={logout}>Wyloguj</button>
         </div>
       </div>
-      <div className="messagePanel" id="messpan">
-        <div className="otherUserDescription">
-          Wiesiaa 
-          <button className="close">
-            <CgClose style={{fontSize:"25",color:"#535353"}}/>
-          </button>
-        </div>
-        <div className="conversation">
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-          <Message text="Cześć!"/>
-          <Message text="Hejka naklejka"/>
-         </div>
-         <div className="newMessageField">
-          <textarea className="newMessageInput"/>
-          <div className="send"><RiSendPlaneLine style={{color:"#0096FF",fontSize:"25"}}/></div>
-         </div>
-      </div>
+        <MessageField/>
       </div>
     </div>
   )
