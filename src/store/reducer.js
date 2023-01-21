@@ -10,6 +10,7 @@ import {
   
   const initialState = () => ({
     token:'',
+    userName:"",
     currentRoom: null,
     messages: [],
     connection: null,
@@ -22,7 +23,8 @@ import {
       case TOKEN:
         return {
           ...state,
-          token: action.data,
+          token: action.data.token,
+          userName:action.data.userName
         };
         case ROOM_LIST:
         return {

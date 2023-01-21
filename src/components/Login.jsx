@@ -18,7 +18,7 @@ const Login = ({ open, setOpen}) => {
   const handleLogin = () => {
     login(logData.nick, logData.password)
       .then((resp) => {
-        dispatch(authenticate(resp.data.token))
+        dispatch(authenticate(logData.nick, resp.data.token))
         .then(()=>{
           navigate("/accountview")
         })

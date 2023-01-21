@@ -7,11 +7,19 @@ import { RiSendPlaneLine } from 'react-icons/ri';
 import { CgClose, CgPen } from 'react-icons/cg';
 import { draw } from '../crud/draw';
 import MessageField from '../components/MessageField';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { createConnection, getRooms } from '../store/actions';
 
 
 function AccountView({setCurView}) {
+  const userName = useSelector(state=>state?.userName)
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(createConnection())
+  },[])
+  const rooms = useSelector(state=>state?.roomList)
   const logout = () => {
       setCurView("StartPage");
       navigate(`/`);
@@ -46,40 +54,13 @@ function AccountView({setCurView}) {
             <CgPen onClick={edit} style={{alignSelf:'flex-start',justifyContent:'flex-end'}}/>
           </div>
           <div className="userPart">
-            <span className="userName">Cześć, <strong>Jacek</strong>!</span>
+            <span className="userName">Cześć, <strong>{userName}</strong>!</span>
             <span className="userDescription">Lubię dobrą książkę, dobry film i sporty ekstermalne takie jak szachy</span>
             <button className="drawbtn" onClick={handleDraw}>Losuj!</button>
           </div>
           </div>
         <div className="userMessages">Twoje wiadomości:
-          <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
-            <Conversation 
-            nick="Asia"
-            messageText="Cześć! Co tam?"
-            time="13:50"/>
+          {rooms.map(room=><Conversation room ={room}/>)}
         </div>
         <div className="logout">
           <button className="logbtn" onClick={logout}>Wyloguj</button>

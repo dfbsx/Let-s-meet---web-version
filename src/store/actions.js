@@ -14,10 +14,10 @@ export const ROOM_ID = "ROOM_ID";
 export const MESSAGES = "MESSAGES";
 export const NEW_MESSAGE = "NEW_MESSAGE";
 
-export const authenticate = (token) => {
+export const authenticate = (userName, token) => {
   return async (dispatch) => {
-     localStorage.setItem('Lets_meeet', token)
-    dispatch({ type: TOKEN, data: token });
+     localStorage.setItem('Lets_meeet', JSON.stringify({userName, token}))
+    dispatch({ type: TOKEN, data: {userName, token} });
   };
 };
 
@@ -25,7 +25,7 @@ export const authenticate = (token) => {
 export const createConnection = () => {
   return async (dispatch, getState) => {
     const connection = new HubConnectionBuilder()
-      .withUrl("https://letsmeet-api.azurewebsites.net/chatter", {
+      .withUrl("https://letsmeetapp.azurewebsites.net/chatter", {
         accessTokenFactory: () => getState().token,
         withCredentials: false,
         transport: HttpTransportType.LongPolling,
@@ -48,7 +48,7 @@ export const createConnection = () => {
 
     connection.start().then(() => {
       dispatch({ type: CONNECTION, data: connection });
-      //dispatch(getRooms());
+      dispatch(getRooms());
     });
   };
 };
@@ -56,12 +56,34 @@ export const createConnection = () => {
 export const join = (roomId) =>{
   return async (dispatch, getState) => {
     dispatch({ type: LOADING, data: true });
+    const current = getState().currentRoom
+    if(current!=null){
+      await leaveRoom()
+    }
     console.log("wchodzi tu z id", roomId)
     const connection = getState().connection;
       await connection.invoke('JoinRoom', {roomId: roomId})
       .then(() => {
         console.log("great")
         dispatch({ type: ROOM_ID, data: roomId });
+        dispatch({ type: LOADING, data: false });
+         //dispatch(getRooms())
+      })
+      .catch(error=>{
+        console.log("fuck", error)
+        dispatch({ type: LOADING, data: false });
+      })
+  }
+}
+
+export const create = (Id) =>{
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, data: true });
+    const connection = getState().connection;
+      await connection.invoke('CreateRoom', {Id:Id})
+      .then(() => {
+        console.log("great")
+        //dispatch({ type: ROOM_ID, data: roomId });
         dispatch({ type: LOADING, data: false });
          //dispatch(getRooms())
       })
@@ -97,6 +119,20 @@ export const newRoom = (roomId) =>{
   return async (dispatch, getState) => {
     const current = getState().roomList
       dispatch({ type: ROOM_LIST, data: [...current, roomId] });
+  }
+}
+export const getRooms = () =>{
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, data: true });
+    const connection = getState().connection;
+      await connection.invoke('GetRoomsList')
+      .then((rooms) => {
+        console.log("to pokoje", rooms)
+        dispatch({ type: ROOM_LIST, data: rooms });
+      })
+      .catch(error=>{
+        console.log("fuck", error)
+      })
   }
 }
 export const leaveRoom = () =>{
