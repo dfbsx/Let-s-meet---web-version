@@ -9,7 +9,7 @@ import { draw } from '../crud/draw';
 import MessageField from '../components/MessageField';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { createConnection, getRooms } from '../store/actions';
+import { createConnection, getRooms, join } from '../store/actions';
 
 
 function AccountView({setCurView}) {
@@ -34,9 +34,11 @@ function AccountView({setCurView}) {
       draw()
       .then((resp)=>{
           console.log("to dostaliśmy", resp.data)
+          dispatch(getRooms())
+          //dispatch(join()) 
       })
       .catch(err=>{
-
+        console.log("Nie działa bo:", err)
       })
     }
 

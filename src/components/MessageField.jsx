@@ -8,15 +8,15 @@ import { useState } from "react";
 import { sendMessage } from "../store/actions";
 
 function MessageField() {
-  const roomId = useSelector(state=>state?.currentRoom)
+  const user = useSelector(state=>state?.currentUser)
   const [message, setMessage]=useState("")
   const dispatch = useDispatch()
   const messages=useSelector(state=>state?.messages)
-  console.log("wiadomości", messages)
+  //console.log("wiadomości", messages)
   return (
     <div className="messagePanel" id="messpan">
       <div className="otherUserDescription">
-        {roomId}
+        {user? user: "Wybierz pokój"}
         <button className="close">
           <CgClose style={{ fontSize: "25", color: "#535353" }} />
         </button>
@@ -32,7 +32,10 @@ function MessageField() {
         />
         <div className="send" 
           onClick={()=>{
-            dispatch(sendMessage(message))
+            if(message){
+              dispatch(sendMessage(message))
+              .then(()=>setMessage(""))
+            }
           }}
         >
           <RiSendPlaneLine style={{ color: "#0096FF", fontSize: "25" }} />

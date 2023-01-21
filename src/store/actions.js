@@ -13,6 +13,7 @@ export const LOADING = "LOADING";
 export const ROOM_ID = "ROOM_ID";
 export const MESSAGES = "MESSAGES";
 export const NEW_MESSAGE = "NEW_MESSAGE";
+export const SET_USER = "SET_USER";
 
 export const authenticate = (userName, token) => {
   return async (dispatch) => {
@@ -40,10 +41,15 @@ export const createConnection = () => {
     connection.on("ReceiveMessage", (message) => {
       console.log("wiadomosc",message)
       //dispatch(getRooms());
-      if ( !message.message || message.roomId !== getState().currentRoom){
+      if ( typeof message === "string"){
         return;
       }
-       dispatch({ type: NEW_MESSAGE, data: message });
+      if(Array.isArray(message)){
+        dispatch({ type: MESSAGES, data: message });
+      }
+      else{
+        dispatch({ type: NEW_MESSAGE, data: message });
+      }
     });
 
     connection.start().then(() => {
@@ -94,16 +100,17 @@ export const create = (Id) =>{
   }
 }
 
-export const sendMessage = (message) =>{
+export const sendMessage = (content) =>{
   return async (dispatch, getState) => {
-    if (message === null || message === "" || getState().connection.currentRoom===null) {
+    /*if (message === null || message === "" || getState().connection.currentRoom===null) {
       return;
-    }
+    }*/
 
     const connection = getState().connection;
-    connection.invoke("SendMessage", {
+    const room = getState().currentRoom;
+    /*connection.invoke("SendMessage", {
       roomId: getState().currentRoom,
-      message: message,
+      content: message,
     });
     const tmp = [...getState().messages];
     const tmpMessage = {
@@ -113,6 +120,8 @@ export const sendMessage = (message) =>{
     };
     tmp.push(tmpMessage);
     dispatch({ type: NEW_MESSAGE, data: tmpMessage});
+    */
+    connection.invoke("SendMessage", {room, content});
   };
 }
 export const newRoom = (roomId) =>{
@@ -141,5 +150,10 @@ export const leaveRoom = () =>{
     connection.connection.send("LeaveRoom", { room: connection.currentRoom }).then(() => {
       dispatch({ type: ROOM_ID, data: null });
     });
+  }
+}
+export const setUser = (userName) =>{
+  return async (dispatch, getState) => {
+      dispatch({ type: SET_USER, data: userName });
   }
 }

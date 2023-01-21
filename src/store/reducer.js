@@ -6,12 +6,14 @@ import {
     MESSAGES,
     ROOM_ID,
     NEW_MESSAGE,
+    SET_USER
   } from "./actions";
   
   const initialState = () => ({
     token:'',
     userName:"",
     currentRoom: null,
+    currentUser:"",
     messages: [],
     connection: null,
     roomList: [],
@@ -56,6 +58,11 @@ import {
           ...state,
           messages: [...state.messages, action.data],
         };
+      case SET_USER:
+        return{
+          ...state,
+          currentUser:action.data
+        }
       default:
         return state;
     }
