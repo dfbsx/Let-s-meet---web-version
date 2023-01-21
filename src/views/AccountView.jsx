@@ -45,17 +45,7 @@ function AccountView({setCurView}) {
       navigate(`/editProfile`);
     };
 
-    const handleDraw = () => {
-      draw()
-      .then((resp)=>{
-          console.log("to dostaliśmy", resp.data)
-          dispatch(getRooms())
-          //dispatch(join()) 
-      })
-      .catch(err=>{
-        console.log("Nie działa bo:", err)
-      })
-    }
+  
 
   return (
     <div className="AccountView">

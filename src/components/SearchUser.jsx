@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { draw } from '../crud/draw';
 import { useDispatch } from 'react-redux';
 import {  getRooms } from '../store/actions';
@@ -8,10 +8,31 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 
-
-
 function SearchUser({open, setOpen}) {
+    const dispatch = useDispatch()
+
+    const [newPerson, setNewPerson] = useState({
+        isUniversity:true,
+        isCity:true,
+        gender:"Female",
+    })
     if (!open) return null;
+    const handleDraw = () => {
+        console.log("nowy obiekt", newPerson)
+         draw()
+        .then((resp)=>{
+            console.log("to dostaliśmy", resp.data)
+            dispatch(getRooms())
+            
+            //dispatch(join()) 
+        })
+        .catch(err=>{
+          console.log("Nie działa bo:", err)
+          console.log("nowy obiekt", newPerson)
+          alert("Nie znaleziono odpowiedniego użytkownika :c")
+        })
+      }
+
   return (
     <div onClick={()=>setOpen(false)} className='overlay'>
     <div className='modalContainer'
@@ -23,20 +44,29 @@ function SearchUser({open, setOpen}) {
         <div className="info">
             <div>Wspólna uczelnia?  
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography>Tak</Typography>
-              <Switch
-
-              />
               <Typography>Nie</Typography>
+              <Switch
+                defaultChecked
+                value={newPerson.isUniversity}
+                onChange={(event)=>{
+                    setNewPerson({...newPerson, isUniversity:event.target.checked})
+                }}
+                
+              />
+              <Typography>Tak</Typography>
             </Stack>
              </div>
-            <div> Wspólny kierunek?
+            <div> Wspólne miasto?
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography>Tak</Typography>
-              <Switch
-
-              />
               <Typography>Nie</Typography>
+              <Switch
+                defaultChecked
+                value={newPerson.isCity}
+                onChange={(event)=>{
+                    setNewPerson({...newPerson, isCity:event.target.checked})
+                }}
+              />
+              <Typography>Tak</Typography>
             </Stack>
             </div>
             <div>
@@ -44,12 +74,15 @@ function SearchUser({open, setOpen}) {
             <Stack direction="row" spacing={1} alignItems="center">
               <Typography>Kobieta</Typography>
               <Switch
-
+                value={newPerson.gender}
+                onChange={(event)=>{
+                    setNewPerson({...newPerson, gender:event.target.checked? "Male":"Female"})
+                }}
               />
               <Typography>Mężczyzna</Typography>
             </Stack>
             </div>
-            <button className="drawbtn"  >Losuj!</button>
+            <button className="drawbtn" onClick={handleDraw} >Losuj!</button>
         </div>
       </div>
     </div>
