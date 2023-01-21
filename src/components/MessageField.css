@@ -1,4 +1,4 @@
-.otherUserDescription{
+.convHeader{
     flex:1;
     min-height: 50px;
     display: flex;
@@ -58,4 +58,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#otherUserDescription{
+    visibility: hidden;
 }

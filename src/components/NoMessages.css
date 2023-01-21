@@ -1,0 +1,20 @@
+.noMessages{
+    display: flex;
+    flex-direction: column;
+    flex:3.5;
+    height: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cdd4d8;
+    background-color: #fff;
+    border-radius: 16px;
+    box-sizing: border-box;
+    overflow:auto;
+    padding: 10px;
+    box-sizing: border-box;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: large;
+}

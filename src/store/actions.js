@@ -41,14 +41,16 @@ export const createConnection = () => {
     connection.on("ReceiveMessage", (message) => {
       console.log("wiadomosc",message)
       //dispatch(getRooms());
-      if ( typeof message === "string"){
+      if ( typeof message === "string" ){
         return;
       }
       if(Array.isArray(message)){
         dispatch({ type: MESSAGES, data: message });
       }
       else{
-        dispatch({ type: NEW_MESSAGE, data: message });
+        if(message?.roomId=== getState().currentRoom){
+          dispatch({ type: NEW_MESSAGE, data: message });
+        }
       }
     });
 

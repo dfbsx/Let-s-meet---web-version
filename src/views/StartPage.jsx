@@ -46,7 +46,7 @@ function StartPage({setCurView}) {
         })
         .catch((error)=>{
             console.log("dupa",error.response.data.title)
-            //setSucessedRegister(false)
+            alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         })
       }
 
