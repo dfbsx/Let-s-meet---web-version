@@ -16,7 +16,7 @@ import SearchUser from '../components/SearchUser';
 
 function AccountView({setCurView}) {
   const [userBio, setUserBio] = useState()
-  const [draw,setDraw] = useState(false)
+  const [openModal,setOpenModal]=useState(false)
   const roomList = useSelector(state=>state?.roomList)
   const userName = useSelector(state=>state?.userName)
   const navigate = useNavigate();
@@ -59,6 +59,10 @@ function AccountView({setCurView}) {
 
   return (
     <div className="AccountView">
+       <SearchUser
+                    open={openModal}  
+                    setOpen={setOpenModal}
+                />
       <div className="webHeader">
                 Let's meet!
                 <button className="logoutbtn" onClick={logout}>Wyloguj</button>
@@ -72,7 +76,7 @@ function AccountView({setCurView}) {
           <div className="userPart">
             <span className="userName">Cześć, <strong>{userName}</strong>!</span>
             <span className="userDescription">{userBio}</span>
-            <button className="drawbtn" >Losuj!</button>
+            <button className="drawbtn" onClick={() => setOpenModal(true)} >Losuj!</button>
           </div>
           </div>
         <div className="userMessages">Twoje wiadomości:
