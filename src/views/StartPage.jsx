@@ -118,6 +118,9 @@ function StartPage({setCurView}) {
                             value={registerData.major}
                             onChange={(e)=>setRegister({...registerData, major:e.target.value})}
                         />
+                         <input className='registerInput'
+                            placeholder="Płeć"
+                        />
                         <button className="registerButton" onClick={handleRegister}>Dołącz!</button>
                     </form>
                 </div>
