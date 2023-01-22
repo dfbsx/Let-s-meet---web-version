@@ -57,7 +57,10 @@ function StartPage({setCurView}) {
                     setOpen={setOpenModal}
                 />
             <div className="webHeader">
-                <span style={{fontFamily:"Courier"}}>Let's meet!</span>
+                <div className='logoandheader'>
+                <div className="logo"></div>
+                <span>Let's meet!</span>
+                </div>
                 <button className="logbtn" onClick={() => setOpenModal(true)}>Zaloguj</button>
             </div>
             <div className="webBody">

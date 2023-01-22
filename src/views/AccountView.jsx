@@ -54,7 +54,10 @@ function AccountView({setCurView}) {
                     setOpen={setOpenModal}
                 />
       <div className="webHeader">
-                Let's meet!
+                <div className='logoandheader'>
+                <div className="logo"></div>
+                <span>Let's meet!</span>
+                </div>
                 <button className="logoutbtn" onClick={logout}>Wyloguj</button>
       </div>
       <div className="siteBody">
