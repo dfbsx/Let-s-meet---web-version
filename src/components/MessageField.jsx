@@ -57,9 +57,7 @@ function MessageField() {
                 />
       <div className="convHeader">
         <div onClick={() => setOpenModal(true)}>{user ? user : "Wylosuj pokój"}</div>
-        <button className="close">
-          <CgClose style={{ fontSize: "25", color: "#535353" }} />
-        </button>
+       
       </div>
       <div className="conversation" >
         { messages.length==0?<p style={{fontStyle:"italic"}}>Rozpocznij konwersację</p>:messages.map((message) => (<Message message={message} />))}

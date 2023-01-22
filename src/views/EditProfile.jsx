@@ -57,7 +57,10 @@ function EditProfile({ setCurView }) {
   return (
     <div className="editView">
       <div className="webHeader">
-        Let's meet!
+      <div className='logoandheader'>
+                <div className="logo"></div>
+                <span>Let's meet!</span>
+                </div>
         <button className="logoutbtn" onClick={logout}>
           Wyloguj
         </button>

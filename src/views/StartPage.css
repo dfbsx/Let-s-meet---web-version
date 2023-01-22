@@ -9,11 +9,21 @@
     justify-content: space-between;
     box-sizing: border-box;
     font-size: xx-large;
-    font-weight: 700;
-    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
 }
 
+.logo{
+    height: 55px;
+    width: 60px;
+    background-image: url("./lm.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
+.logoandheader{
+    display: flex;
+    flex-direction: row;
+}
 
 .logbtn{
     height:40px;
