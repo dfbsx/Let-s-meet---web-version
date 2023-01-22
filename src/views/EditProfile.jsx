@@ -26,7 +26,7 @@ function EditProfile({ setCurView }) {
       })
       .catch((err) => {
         setIsLoading(false);
-        alert("Wystąpił błąd połączenia z serwerem");
+        alert(err.response.data.title?err.response.data.title:"Wystąpił nieznany błąd")
       });
   }, []);
 
@@ -49,6 +49,7 @@ function EditProfile({ setCurView }) {
       })
       .catch((error) => {
         console.log("dupa", error.response.data.title);
+        alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         //setSucessedRegister(false)
       });
   };

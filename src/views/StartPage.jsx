@@ -15,10 +15,10 @@ function StartPage({setCurView}) {
 
     useEffect(
        ()=>{
-        const token = localStorage.getItem("Lets_meeet")
-        console.log(token)
-        if(token){
-            dispatch(authenticate(token))
+        const user = JSON.parse(localStorage.getItem("Lets_meeet"))
+        console.log("to local", user)
+        if(user?.token){
+            dispatch(authenticate(user.userName, user.token))
             navigate("/accountview")
         }
        }
@@ -46,7 +46,7 @@ function StartPage({setCurView}) {
         })
         .catch((error)=>{
             console.log("dupa",error.response.data.title)
-            //setSucessedRegister(false)
+            alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         })
       }
 
