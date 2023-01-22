@@ -14,7 +14,7 @@ function Conversation({room}) {
     >
         <div className="conversation">
             <div className="userNick">{room.roomName?room.roomName : "Pokój usunięty" }</div>
-            <div className="messageText">Test</div>
+            <div className="messageText">{room.lastMessage!==null?room.lastMessage: "Brak wiadomości" }</div>
         </div>
     </div>
   )
