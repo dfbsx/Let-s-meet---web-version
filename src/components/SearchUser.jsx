@@ -3,9 +3,9 @@ import { draw } from '../crud/draw';
 import { useDispatch } from 'react-redux';
 import {  getRooms } from '../store/actions';
 import "./SearchUser.css";
-import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+//import Switch from "@mui/material/Switch";
+//import Stack from "@mui/material/Stack";
+//import Typography from "@mui/material/Typography";
 
 
 function SearchUser({open, setOpen}) {
@@ -34,7 +34,7 @@ function SearchUser({open, setOpen}) {
       }
 
   return (
-    <div onClick={()=>setOpen(false)} className='overlay'>
+   /* <div onClick={()=>setOpen(false)} className='overlay'>
     <div className='modalContainer'
       onClick={(e) => {
         e.stopPropagation();
@@ -71,22 +71,23 @@ function SearchUser({open, setOpen}) {
             </div>
             <div>
 
-            <Stack direction="row" spacing={1} alignItems="center">
-              <Typography>Kobieta</Typography>
-              <Switch
-                value={newPerson.gender}
-                onChange={(event)=>{
-                    setNewPerson({...newPerson, gender:event.target.checked? "Male":"Female"})
-                }}
-              />
-              <Typography>Mężczyzna</Typography>
-            </Stack>
+            <label for="cars">Płeć:</label>
+              <select className="cars" id="cars">
+
+    <option value="volvo">Kobieta</option>
+    <option value="saab">Mężczyzna</option>
+
+
+    <option value="mercedes">Bez filtrowania</option>
+
+
+              </select>
             </div>
             <button className="drawbtn" onClick={handleDraw} >Losuj!</button>
         </div>
       </div>
     </div>
-  </div>
+  </div>*/<></>
   )
 }
 

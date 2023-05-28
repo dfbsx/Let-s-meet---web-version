@@ -15,3 +15,16 @@
     display: flex;
     align-items: flex-end;
 }
+
+.recivedMessage{
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #0096FF;
+    background-color: #fff;
+    color: #535353;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: fit-content;
+    display: flex; 
+}

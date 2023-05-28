@@ -37,17 +37,23 @@ function StartPage({setCurView}) {
         major:""
     })
       const handleRegister = () => {
+        if (registerData.password.length > 8) {
         register(registerData)
         .then((resp)=>{
-            dispatch(authenticate(resp.data.token))
+            console.log("Resp",resp)
+            dispatch(authenticate(resp.data.userName,resp.data.token))
             .then(()=>{
                 navigate("/accountview")
               })
         })
         .catch((error)=>{
-            console.log("dupa",error.response.data.title)
+            console.log(error.response.data.title)
             alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         })
+    }
+    else{
+        alert("Hasło musi zawierać minimum 8 znaków!")
+    }
       }
 
     return (
@@ -122,7 +128,7 @@ function StartPage({setCurView}) {
                             onChange={(e)=>setRegister({...registerData, major:e.target.value})}
                         />
                          <input className='registerInput'
-                            placeholder="Płeć"
+                            placeholder="Płeć (K/M)"
                         />
                         <button className="registerButton" onClick={handleRegister}>Dołącz!</button>
                     </form>

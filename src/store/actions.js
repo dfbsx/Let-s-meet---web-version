@@ -5,7 +5,6 @@ import {
   LogLevel,
 } from "@microsoft/signalr";
 
-
 export const TOKEN = "TOKEN"
 export const ROOM_LIST = "ROOM_LIST";
 export const CONNECTION = "CONNECTION";
@@ -15,6 +14,8 @@ export const MESSAGES = "MESSAGES";
 export const NEW_MESSAGE = "NEW_MESSAGE";
 export const SET_USER = "SET_USER";
 
+
+
 export const authenticate = (userName, token) => {
   return async (dispatch) => {
      localStorage.setItem('Lets_meeet', JSON.stringify({userName, token}))
@@ -23,11 +24,20 @@ export const authenticate = (userName, token) => {
 };
 
 
-export const createConnection = () => {
+
+
+/*export const createConnection = () => {
+  const user = JSON.parse(localStorage.getItem("Lets_meeet"));
+  
   return async (dispatch, getState) => {
+    console.log("tutaj token", getState().token);
     const connection = new HubConnectionBuilder()
       .withUrl("https://letsmeetapp.azurewebsites.net/chatter", {
-        accessTokenFactory: () => getState().token,
+        accessTokenFactory: () => {
+          const token = getState().token;
+          console.log("Header token", token);
+          return token;
+        },
         withCredentials: false,
         transport: HttpTransportType.LongPolling,
       })
@@ -37,7 +47,6 @@ export const createConnection = () => {
     connection.on("ReceiveCurrentAgentRoomList", (rooms) => {
       dispatch({ type: ROOM_LIST, data: rooms });
     });
-
     connection.on("ReceiveMessage", (message) => {
       console.log("wiadomosc",message)
       //dispatch(getRooms());
@@ -59,7 +68,53 @@ export const createConnection = () => {
       dispatch(getRooms());
     });
   };
+};*/
+
+export const createConnection = (token) => {
+  const user = JSON.parse(localStorage.getItem("Lets_meeet"));
+  
+  return async (dispatch, getState) => {
+    const { userName, token } = user;
+    console.log("tutaj token", token);
+    
+    const connection = new HubConnectionBuilder()
+      .withUrl("https://letsmeetapp.azurewebsites.net/chatter", {
+        accessTokenFactory: () => {
+          console.log("Header token", token);
+          return token;
+        },
+        withCredentials: false,
+        transport: HttpTransportType.LongPolling,
+      })
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    connection.on("ReceiveCurrentAgentRoomList", (rooms) => {
+      dispatch({ type: ROOM_LIST, data: rooms });
+    });
+    connection.on("ReceiveMessage", (message) => {
+      console.log("wiadomosc", message)
+      //dispatch(getRooms());
+      if (typeof message === "string") {
+        return;
+      }
+      if (Array.isArray(message)) {
+        dispatch({ type: MESSAGES, data: message });
+      } else {
+        if (message?.roomId === getState().currentRoom) {
+          dispatch({ type: NEW_MESSAGE, data: message });
+        }
+      }
+    });
+
+    connection.start().then(() => {
+      dispatch({ type: CONNECTION, data: connection });
+      dispatch(getRooms());
+    });
+  };
 };
+
+
 
 export const join = (roomId) =>{
   return async (dispatch, getState) => {
@@ -96,7 +151,7 @@ export const create = (Id) =>{
          //dispatch(getRooms())
       })
       .catch(error=>{
-        console.log("fuck", error)
+        console.log("nie", error)
         dispatch({ type: LOADING, data: false });
       })
   }

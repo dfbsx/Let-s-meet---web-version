@@ -17,15 +17,13 @@ const Login = ({ open, setOpen}) => {
 
   const handleLogin = () => {
     login(logData.nick, logData.password)
-      .then((resp) => {
-        dispatch(authenticate(logData.nick, resp.data.token))
-        .then(()=>{
-          navigate("/accountview")
-        })
-      })
-      .catch((error) => {
-        alert("Wprowadzone dane są niepoprawne")
-      })
+    .then((resp) => {
+      dispatch(authenticate(logData.nick, resp.data.token));
+      navigate("/accountview");
+    })
+    .catch((error) => {
+      alert("Wprowadzone dane są niepoprawne");
+    });
   }
   if (!open) return null;
   return (

@@ -6,10 +6,12 @@ import { CgClose } from "react-icons/cg";
 import { useEffect } from "react";
 import { getUserData } from "../crud/getUserData";
 import { updateUserData } from "../crud/updateUserData";
+import { TOKEN } from "../store/actions";
 
 function EditProfile({ setCurView }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState();
   const [userData, setUserData] = useState({
     userName: "",
     bio: "",
@@ -19,7 +21,9 @@ function EditProfile({ setCurView }) {
   });
 
   useEffect(() => {
-    getUserData()
+    const user = JSON.parse(localStorage.getItem("Lets_meeet"))
+    setToken(user.token);
+    getUserData(user.token)
       .then((resp) => {
         setUserData(resp.data);
         setIsLoading(false);
@@ -41,14 +45,14 @@ function EditProfile({ setCurView }) {
   };
 
   const handleUpdateData = () => {
-    updateUserData(userData)
+    updateUserData(userData,token)
       .then(() => {
         console.log("jej");
         console.log(userData);
         alert("Dane zostały zaktualizowane!");
       })
       .catch((error) => {
-        console.log("dupa", error.response.data.title);
+        console.log( error.response.data.title);
         alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         //setSucessedRegister(false)
       });
@@ -112,6 +116,7 @@ function EditProfile({ setCurView }) {
                 setUserData({ ...userData, major: e.target.value })
               }
             />
+            
             <button className="saveDataButton" onClick={handleUpdateData}>
               Zapisz
             </button>
