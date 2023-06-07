@@ -197,7 +197,7 @@ export const getRooms = () =>{
         dispatch({ type: ROOM_LIST, data: rooms });
       })
       .catch(error=>{
-        console.log("fuck", error)
+        console.log(error)
       })
   }
 }

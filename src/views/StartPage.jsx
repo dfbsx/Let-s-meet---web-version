@@ -8,7 +8,7 @@ import { authenticate } from '../store/actions';
 import { useEffect } from 'react';
 
 
-function StartPage({setCurView}) {
+function StartPage({setisLoggedIn}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -41,6 +41,7 @@ function StartPage({setCurView}) {
         register(registerData)
         .then((resp)=>{
             console.log("Resp",resp)
+            setisLoggedIn(true);
             dispatch(authenticate(resp.data.userName,resp.data.token))
             .then(()=>{
                 navigate("/accountview")
@@ -61,6 +62,7 @@ function StartPage({setCurView}) {
             <Login 
                     open={openModal}  
                     setOpen={setOpenModal}
+                    setisLoggedIn={setisLoggedIn}
                 />
             <div className="webHeader">
                 <div className='logoandheader'>

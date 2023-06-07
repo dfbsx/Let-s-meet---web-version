@@ -8,7 +8,7 @@ import { getUserData } from "../crud/getUserData";
 import { updateUserData } from "../crud/updateUserData";
 import { TOKEN } from "../store/actions";
 
-function EditProfile({ setCurView }) {
+function EditProfile() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState();
@@ -22,25 +22,26 @@ function EditProfile({ setCurView }) {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("Lets_meeet"))
+    console.log("Edycja widok")
     setToken(user.token);
     getUserData(user.token)
       .then((resp) => {
         setUserData(resp.data);
         setIsLoading(false);
+        console.log("pobrało")
       })
       .catch((err) => {
         setIsLoading(false);
         alert(err.response.data.title?err.response.data.title:"Wystąpił nieznany błąd")
+        console.log("Nie pobrało")
       });
   }, []);
 
   const logout = () => {
-    setCurView("StartPage");
     navigate(`/`);
   };
 
   const backToMainView = () => {
-    setCurView("AccountView");
     navigate(`/accountView`);
   };
 
@@ -49,7 +50,7 @@ function EditProfile({ setCurView }) {
       .then(() => {
         console.log("jej");
         console.log(userData);
-        alert("Dane zostały zaktualizowane!");
+        backToMainView();
       })
       .catch((error) => {
         console.log( error.response.data.title);

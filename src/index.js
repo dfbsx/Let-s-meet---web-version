@@ -4,17 +4,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./store"; // Importuj sklep Redux
+import ReactDOM from 'react-dom/client';
 
 
-const rootElement = document.getElementById("root");
-createRoot(rootElement).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
   </Provider>
 );
 

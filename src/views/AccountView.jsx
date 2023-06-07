@@ -14,7 +14,7 @@ import NoMessages from '../components/NoMessages';
 import SearchUser from '../components/SearchUser';
 
 
-function AccountView({setCurView}) {
+function AccountView({setCurView,setisLoggedIn}) {
   const [userBio, setUserBio] = useState()
   const [openModal,setOpenModal]=useState(false)
   const roomList = useSelector(state=>state?.roomList)
@@ -37,13 +37,12 @@ function AccountView({setCurView}) {
   },[userBio])
   const rooms = useSelector(state=>state?.roomList)
   const logout = () => {
-      setCurView("StartPage");
       navigate(`/`);
       localStorage.removeItem("Lets_meeet")
+      setisLoggedIn(false);
     };
 
     const edit = () => {
-      setCurView("EditProfile");
       navigate(`/editProfile`);
     };
 
