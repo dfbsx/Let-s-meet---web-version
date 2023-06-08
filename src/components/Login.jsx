@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { authenticate } from '../store/actions';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ open, setOpen}) => {
+const Login = ({ open, setOpen, setisLoggedIn}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -16,16 +16,18 @@ const Login = ({ open, setOpen}) => {
 
 
   const handleLogin = () => {
+    console.log(logData)
     login(logData.nick, logData.password)
-      .then((resp) => {
-        dispatch(authenticate(logData.nick, resp.data.token))
-        .then(()=>{
-          navigate("/accountview")
-        })
-      })
-      .catch((error) => {
-        alert("Wprowadzone dane są niepoprawne")
-      })
+    .then((resp) => {
+      console.log("22")
+      setisLoggedIn(true);
+      dispatch(authenticate(logData.nick, resp.data.token));
+      console.log("24")
+      navigate("/accountview");
+    })
+    .catch((error) => {
+      alert("Wprowadzone dane są niepoprawne");
+    });
   }
   if (!open) return null;
   return (

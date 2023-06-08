@@ -8,7 +8,7 @@ import { authenticate } from '../store/actions';
 import { useEffect } from 'react';
 
 
-function StartPage({setCurView}) {
+function StartPage({setisLoggedIn}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -37,17 +37,24 @@ function StartPage({setCurView}) {
         major:""
     })
       const handleRegister = () => {
+        if (registerData.password.length > 8) {
         register(registerData)
         .then((resp)=>{
-            dispatch(authenticate(resp.data.token))
+            console.log("Resp",resp)
+            setisLoggedIn(true);
+            dispatch(authenticate(resp.data.userName,resp.data.token))
             .then(()=>{
                 navigate("/accountview")
               })
         })
         .catch((error)=>{
-            console.log("dupa",error.response.data.title)
+            console.log(error.response.data.title)
             alert(error.response.data.title?error.response.data.title:"Wystąpił nieznany błąd")
         })
+    }
+    else{
+        alert("Hasło musi zawierać minimum 8 znaków!")
+    }
       }
 
     return (
@@ -55,6 +62,7 @@ function StartPage({setCurView}) {
             <Login 
                     open={openModal}  
                     setOpen={setOpenModal}
+                    setisLoggedIn={setisLoggedIn}
                 />
             <div className="webHeader">
                 <div className='logoandheader'>
@@ -122,7 +130,7 @@ function StartPage({setCurView}) {
                             onChange={(e)=>setRegister({...registerData, major:e.target.value})}
                         />
                          <input className='registerInput'
-                            placeholder="Płeć"
+                            placeholder="Płeć (K/M)"
                         />
                         <button className="registerButton" onClick={handleRegister}>Dołącz!</button>
                     </form>

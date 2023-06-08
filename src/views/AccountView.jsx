@@ -14,34 +14,35 @@ import NoMessages from '../components/NoMessages';
 import SearchUser from '../components/SearchUser';
 
 
-function AccountView({setCurView}) {
+function AccountView({setCurView,setisLoggedIn}) {
   const [userBio, setUserBio] = useState()
   const [openModal,setOpenModal]=useState(false)
   const roomList = useSelector(state=>state?.roomList)
   const userName = useSelector(state=>state?.userName)
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const [userN, setUserN] = useState()
  
   useEffect(()=>{
-    dispatch(createConnection())
-    getUserData()
+    const user = JSON.parse(localStorage.getItem("Lets_meeet"))
+    //dispatch(createConnection(user.token))
+    getUserData(user?.token)
       .then((resp) => {
-        console.log("bio",resp.data)
         setUserBio(resp.data.bio)
+        setUserN(resp.data.userName)
       })
       .catch((err) => {
         alert(err.response.data.title?err.response.data.title:"Wystąpił nieznany błąd")
       });
-  },[])
+  },[userBio,roomList])
   const rooms = useSelector(state=>state?.roomList)
   const logout = () => {
-      setCurView("StartPage");
       navigate(`/`);
       localStorage.removeItem("Lets_meeet")
+      setisLoggedIn(false);
     };
 
     const edit = () => {
-      setCurView("EditProfile");
       navigate(`/editProfile`);
     };
 
@@ -67,20 +68,20 @@ function AccountView({setCurView}) {
             <CgPen onClick={edit} style={{alignSelf:'flex-start',justifyContent:'flex-end'}}/>
           </div>
           <div className="userPart">
-            <span className="userName">Cześć, <strong>{userName}</strong>!</span>
+            <span className="userName">Cześć, <strong>{userN}</strong>!</span>
             <span className="userDescription">{userBio}</span>
             <button className="drawbtn" onClick={() => setOpenModal(true)} >Losuj!</button>
           </div>
           </div>
         <div className="userMessages">Twoje wiadomości:
-          {rooms.map(room=><Conversation room ={room}/>)}
+          {rooms?.map(room=><Conversation room ={room}/>)}
         </div>
         <div className="logout">
           <button className="logbtn" onClick={logout}>Wyloguj</button>
         </div>
       </div>
       {
-        roomList?.length==0?<NoMessages/>:<MessageField/>
+        roomList?.length===0?<NoMessages/>:<MessageField/>
       }
         
       </div>

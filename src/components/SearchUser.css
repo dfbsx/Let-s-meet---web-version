@@ -7,3 +7,26 @@
     align-items: center;
     gap:16px;
   }
+
+  .cars{
+    margin: 5px;
+    border-radius: 8px;
+  }
+
+  .options{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
+
+  .banner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .filter{
+    padding: 3px;
+    border-radius: 3px;
+  }

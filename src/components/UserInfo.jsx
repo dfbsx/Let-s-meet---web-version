@@ -17,6 +17,7 @@ function UserInfo({ open, setOpen,otherUserData}) {
             <p>Miasto: {otherUserData?.city}</p>
             <p>Uczelnia: {otherUserData?.university}</p>
             <p>Kierunek: {otherUserData?.major}</p>
+            <p>Płeć: M</p>
         </div>
       </div>
     </div>
