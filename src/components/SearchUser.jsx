@@ -16,18 +16,33 @@ function SearchUser({ open, setOpen }) {
   if (!open) return null;
   const handleDraw = () => {
     console.log("nowy obiekt", newPerson);
-    draw()
+   /* draw()
       .then((resp) => {
         console.log("to dostaliśmy", resp.data);
-        dispatch(getRooms());
-        dispatch(join())
+        //dispatch(getRooms());
+        //dispatch(join())
       })
       .catch((err) => {
         console.log("Nie działa bo:", err);
         console.log("nowy obiekt", newPerson);
         alert("Nie znaleziono odpowiedniego użytkownika :c");
-      });
+      });*/
   };
+
+  const selectUni=() => {
+    const uni = document.getElementById("uni").value;
+    setNewPerson({ ...newPerson, isUniversity: uni })
+}
+
+const selectCity=() => {
+  const city = document.getElementById("city").value;
+  setNewPerson({ ...newPerson, isCity: city })
+}
+
+const selectGender=() => {
+  const gender = document.getElementById("gender").value;
+  setNewPerson({ ...newPerson, gender: gender })
+}
 
   return (
     <div onClick={() => setOpen(false)} className="overlay">
@@ -42,26 +57,22 @@ function SearchUser({ open, setOpen }) {
           <div className="info">
             <div className="options">
               <label htmlFor="filter">Wspólna uczelnia?:</label>
-              <select className="filter" id="cars">
-                <option value="volvo">Tak</option>
-                <option value="saab">Nie</option>
-
-                <option value="mercedes">Bez filtrowania</option>
+              <select className="filter" id="uni" onChange={selectUni}>
+                <option value="true">Tak</option>
+                <option value="false">Nie</option>
+                <option value="">Bez filtrowania</option>
               </select>
               <label htmlFor="filter">Wspólne miasto?:</label>
-              <select className="filter" id="cars">
-                <option value="volvo">Tak</option>
-                <option value="saab">Nie</option>
-
-                <option value="mercedes">Bez filtrowania</option>
+              <select className="filter" id="city" onChange={selectCity}>
+                <option value="true">Tak</option>
+                <option value="false">Nie</option>
+                <option value="">Bez filtrowania</option>
               </select>
-
               <label htmlFor="filter">Płeć:</label>
-              <select className="filter" id="cars">
-                <option value="volvo">Kobieta</option>
-                <option value="saab">Mężczyzna</option>
-
-                <option value="mercedes">Bez filtrowania</option>
+              <select className="filter" id="gender" onChange={selectGender}>
+                <option value="Female">Kobieta</option>
+                <option value="Male">Mężczyzna</option>
+                <option value="">Bez filtrowania</option>
               </select>
             </div>
           </div>
