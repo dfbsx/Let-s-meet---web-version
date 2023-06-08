@@ -106,7 +106,7 @@ export const createConnection = (token) => {
         }
       }
     });
-
+    console.log("połączenie")
     connection.start().then(() => {
       dispatch({ type: CONNECTION, data: connection });
       dispatch(getRooms());
@@ -133,7 +133,7 @@ export const join = (roomId) =>{
          //dispatch(getRooms())
       })
       .catch(error=>{
-        console.log("fuck", error)
+        console.log( error)
         dispatch({ type: LOADING, data: false });
       })
   }
@@ -187,6 +187,7 @@ export const newRoom = (roomId) =>{
       dispatch({ type: ROOM_LIST, data: [...current, roomId] });
   }
 }
+
 export const getRooms = () =>{
   return async (dispatch, getState) => {
     dispatch({ type: LOADING, data: true });
@@ -201,6 +202,7 @@ export const getRooms = () =>{
       })
   }
 }
+
 export const leaveRoom = () =>{
   return async (dispatch, getState) => {
     const connection = getState().connection

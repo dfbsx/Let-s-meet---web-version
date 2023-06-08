@@ -22,6 +22,7 @@ function App() {
     const lsdata = JSON.parse(localStorage.getItem("Lets_meeet"));
     if (lsdata?.userName) {
       setisLoggedIn(true);
+      dispatch(createConnection(lsdata?.token))
       console.log("tak");
     } else {
       setisLoggedIn(false);

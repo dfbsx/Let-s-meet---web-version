@@ -13,36 +13,38 @@ function SearchUser({ open, setOpen }) {
     isCity: true,
     gender: "Female",
   });
+
   if (!open) return null;
+
   const handleDraw = () => {
     console.log("nowy obiekt", newPerson);
-   /* draw()
+    draw(newPerson.isUniversity, newPerson.isCity, newPerson.gender)
       .then((resp) => {
         console.log("to dostaliśmy", resp.data);
-        //dispatch(getRooms());
-        //dispatch(join())
+        dispatch(getRooms());
+        dispatch(join());
+        setOpen(false);
       })
       .catch((err) => {
         console.log("Nie działa bo:", err);
-        console.log("nowy obiekt", newPerson);
-        alert("Nie znaleziono odpowiedniego użytkownika :c");
-      });*/
+        //alert("Nie znaleziono odpowiedniego użytkownika :c");
+      });
   };
 
-  const selectUni=() => {
+  const selectUni = () => {
     const uni = document.getElementById("uni").value;
-    setNewPerson({ ...newPerson, isUniversity: uni })
-}
+    setNewPerson({ ...newPerson, isUniversity: uni });
+  };
 
-const selectCity=() => {
-  const city = document.getElementById("city").value;
-  setNewPerson({ ...newPerson, isCity: city })
-}
+  const selectCity = () => {
+    const city = document.getElementById("city").value;
+    setNewPerson({ ...newPerson, isCity: city });
+  };
 
-const selectGender=() => {
-  const gender = document.getElementById("gender").value;
-  setNewPerson({ ...newPerson, gender: gender })
-}
+  const selectGender = () => {
+    const gender = document.getElementById("gender").value;
+    setNewPerson({ ...newPerson, gender: gender });
+  };
 
   return (
     <div onClick={() => setOpen(false)} className="overlay">
