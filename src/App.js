@@ -43,8 +43,8 @@ function App() {
             <Route
               path="/accountview"
               element={
-                <Protected setisLoggedIn={setisLoggedIn}>
-                  <AccountView />
+                <Protected>
+                  <AccountView setisLoggedIn={setisLoggedIn} />
                 </Protected>
               }
             />

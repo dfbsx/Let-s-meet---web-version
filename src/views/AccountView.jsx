@@ -34,7 +34,7 @@ function AccountView({setCurView,setisLoggedIn}) {
       .catch((err) => {
         alert(err.response.data.title?err.response.data.title:"Wystąpił nieznany błąd")
       });
-  },[userBio])
+  },[userBio,roomList])
   const rooms = useSelector(state=>state?.roomList)
   const logout = () => {
       navigate(`/`);
