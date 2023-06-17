@@ -1,7 +1,8 @@
 import {React, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import { join, setUser } from '../store/actions'
+import { getRooms, join, setUser } from '../store/actions'
 import './Conversation.css'
+import { NEW_MESSAGE } from '../store/actions'
 
 function Conversation({room}) {
   const dispatch = useDispatch()

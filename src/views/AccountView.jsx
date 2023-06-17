@@ -25,7 +25,6 @@ function AccountView({setCurView,setisLoggedIn}) {
  
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("Lets_meeet"))
-    //dispatch(createConnection(user.token))
     getUserData(user?.token)
       .then((resp) => {
         setUserBio(resp.data.bio)
@@ -35,6 +34,7 @@ function AccountView({setCurView,setisLoggedIn}) {
         alert(err.response.data.title?err.response.data.title:"Wystąpił nieznany błąd")
       });
   },[userBio,roomList])
+
   const rooms = useSelector(state=>state?.roomList)
   const logout = () => {
       navigate(`/`);

@@ -72,7 +72,8 @@
 }
 
 .webBody{
-    background-color: #f6f6f6;
+    background: rgb(190,225,246);
+background: linear-gradient(0deg, rgba(190,225,246,1) 0%, rgba(255,255,255,1) 100%);
     height: calc(100vh - 64px);
     display: flex;
     flex-direction: row;
@@ -82,7 +83,7 @@
     column-gap: 50px;
     flex-wrap: wrap;
     overflow: auto;
-    background-image: url("https://img.freepik.com/darmowe-wektory/niebieskie-tlo-geometryczne_1409-961.jpg?w=1060&t=st=1674388889~exp=1674389489~hmac=c11223b4ece73de07697ba02015981ba6ef3e7571da8610e5d85d190f379be53");
+
 }
 
 

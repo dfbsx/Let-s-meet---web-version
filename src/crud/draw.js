@@ -3,6 +3,7 @@ import API_URL  from './configuration';
 
 export const draw = (uni,city,gender) => {
   const user = JSON.parse(localStorage.getItem("Lets_meeet"))
+  console.log("URL:", `${API_URL}/api/chat/draw?${uni ? `isUniversity=${uni}${city || gender ? "&" : ''}` : ''}${city ? `isCity=${city}${gender ? "&" : ""}` : ''}${gender ? `gender=${gender}` : ''}`);
   return axios({
     method: 'GET',
     url: `${API_URL}/api/chat/draw?${uni?`isUniversity=${uni}${city||gender ? "&" :''}`:``}${city? `isCity=${city}${gender?"&":""}`:''}${gender?`gender=${gender}`:``}`,
@@ -10,5 +11,6 @@ export const draw = (uni,city,gender) => {
       'Authorization': `Bearer ${user.token}`, 
       'Content-Type': 'application/json',
     },
-  })
+  },
+  )
 };

@@ -26,8 +26,7 @@ function SearchUser({ open, setOpen }) {
         setOpen(false);
       })
       .catch((err) => {
-        console.log("Nie działa bo:", err);
-        //alert("Nie znaleziono odpowiedniego użytkownika :c");
+        alert("Nie znaleziono odpowiedniego użytkownika :c");
       });
   };
 
@@ -60,14 +59,14 @@ function SearchUser({ open, setOpen }) {
             <div className="options">
               <label htmlFor="filter">Wspólna uczelnia?:</label>
               <select className="filter" id="uni" onChange={selectUni}>
-                <option value="true">Tak</option>
-                <option value="false">Nie</option>
+                <option value={true}>Tak</option>
+                <option value={false}>Nie</option>
                 <option value="">Bez filtrowania</option>
               </select>
               <label htmlFor="filter">Wspólne miasto?:</label>
               <select className="filter" id="city" onChange={selectCity}>
-                <option value="true">Tak</option>
-                <option value="false">Nie</option>
+                <option value={true}>Tak</option>
+                <option value={false}>Nie</option>
                 <option value="">Bez filtrowania</option>
               </select>
               <label htmlFor="filter">Płeć:</label>

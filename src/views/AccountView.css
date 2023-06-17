@@ -13,7 +13,8 @@
     padding: 10px;
     gap:10px;
     box-sizing: border-box;
-    background-image: url("https://img.freepik.com/darmowe-wektory/niebieskie-tlo-geometryczne_1409-961.jpg?w=1060&t=st=1674388889~exp=1674389489~hmac=c11223b4ece73de07697ba02015981ba6ef3e7571da8610e5d85d190f379be53");
+    background: rgb(190,225,246);
+background: linear-gradient(0deg, rgba(190,225,246,1) 0%, rgba(255,255,255,1) 100%);
 }
 .userPanel{
     display: flex;

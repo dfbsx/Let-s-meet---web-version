@@ -34,7 +34,8 @@ function StartPage({setisLoggedIn}) {
         bio:"",
         city:"",
         university:"",
-        major:""
+        major:"",
+        gender:"",
     })
       const handleRegister = () => {
         if (registerData.password.length > 8) {
@@ -131,6 +132,7 @@ function StartPage({setisLoggedIn}) {
                         />
                          <input className='registerInput'
                             placeholder="Płeć (K/M)"
+                            onChange={(e)=>e.target.value==="K"?setRegister({...registerData,gender:2}):setRegister({...registerData,gender:1})}
                         />
                         <button className="registerButton" onClick={handleRegister}>Dołącz!</button>
                     </form>

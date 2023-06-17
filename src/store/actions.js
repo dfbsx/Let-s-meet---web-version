@@ -105,6 +105,7 @@ export const createConnection = (token) => {
           dispatch({ type: NEW_MESSAGE, data: message });
         }
       }
+      dispatch(getRooms());
     });
     console.log("połączenie")
     connection.start().then(() => {
